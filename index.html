@@ -1,57 +1,677 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="./style.css">
-    <title>My Animation Portfoliyo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xurshidbek — Wildberries & Ozon Kartochka Dizayneri</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #12121c;
+  --bg3: #1a1a28;
+  --border: #252538;
+  --text: #f0f0ff;
+  --text2: #9090b0;
+  --text3: #6060a0;
+  --blue: #6366f1;
+  --blue2: #818cf8;
+  --green: #10b981;
+  --pink: #ec4899;
+  --yellow: #f59e0b;
+  --wb: #cb11ab;
+  --oz: #005bff;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+}
+
+/* ===== LANG SWITCH ===== */
+.lang-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10,10,15,.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; height: 54px;
+}
+.nav-logo { font-size: 16px; font-weight: 800; letter-spacing: -.3px; }
+.nav-logo span { color: var(--blue2); }
+.lang-btns { display: flex; gap: 6px; }
+.lang-btn {
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text2); border-radius: 8px; padding: 5px 14px;
+  font-size: 12px; font-weight: 700; cursor: pointer; transition: all .2s;
+}
+.lang-btn.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 80px 24px 60px;
+  background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(99,102,241,.12) 0%, transparent 70%);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236366f1' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.hero-inner { max-width: 700px; position: relative; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(99,102,241,.12); border: 1px solid rgba(99,102,241,.3);
+  border-radius: 50px; padding: 6px 16px; font-size: 12px; font-weight: 600;
+  color: var(--blue2); margin-bottom: 24px;
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+.hero h1 { font-size: clamp(32px, 7vw, 64px); font-weight: 900; line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; }
+.hero h1 .grad { background: linear-gradient(135deg, #6366f1, #ec4899, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub { font-size: clamp(14px, 2.5vw, 18px); color: var(--text2); line-height: 1.7; margin-bottom: 32px; }
+
+.platforms { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px; }
+.plat {
+  display: flex; align-items: center; gap: 7px;
+  border-radius: 10px; padding: 8px 16px; font-size: 13px; font-weight: 700;
+}
+.plat-wb { background: rgba(203,17,171,.12); border: 1px solid rgba(203,17,171,.3); color: #e040c5; }
+.plat-oz { background: rgba(0,91,255,.12); border: 1px solid rgba(0,91,255,.3); color: #4d8aff; }
+.plat-yt { background: rgba(255,0,0,.1); border: 1px solid rgba(255,0,0,.25); color: #ff6666; }
+
+.stats { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px; }
+.stat { text-align: center; }
+.stat-num { font-size: 28px; font-weight: 900; color: var(--blue2); line-height: 1; }
+.stat-lbl { font-size: 11px; color: var(--text3); margin-top: 4px; text-transform: uppercase; letter-spacing: .8px; }
+
+.cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  background: linear-gradient(135deg, #6366f1, #818cf8);
+  color: #fff; border: none; border-radius: 12px; padding: 14px 28px;
+  font-size: 15px; font-weight: 700; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px; transition: all .2s;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(99,102,241,.4); }
+.btn-outline {
+  background: transparent; border: 1px solid var(--border); color: var(--text2);
+  border-radius: 12px; padding: 14px 28px; font-size: 15px; font-weight: 600;
+  cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+  transition: all .2s;
+}
+.btn-outline:hover { border-color: var(--blue2); color: var(--text); }
+
+/* ===== SECTIONS ===== */
+section { padding: 80px 24px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.section-badge {
+  display: inline-block; background: rgba(99,102,241,.1); border: 1px solid rgba(99,102,241,.25);
+  border-radius: 20px; padding: 4px 14px; font-size: 11px; font-weight: 700;
+  color: var(--blue2); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 14px;
+}
+.section-title { font-size: clamp(22px, 4vw, 36px); font-weight: 800; margin-bottom: 10px; }
+.section-sub { font-size: 14px; color: var(--text2); margin-bottom: 40px; line-height: 1.6; }
+
+/* ===== CATEGORIES ===== */
+.cat-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+.cat-tab {
+  background: var(--bg2); border: 1px solid var(--border);
+  color: var(--text2); border-radius: 10px; padding: 8px 18px;
+  font-size: 13px; font-weight: 600; cursor: pointer; transition: all .2s;
+  display: flex; align-items: center; gap: 6px;
+}
+.cat-tab:hover { border-color: var(--blue); color: var(--text); }
+.cat-tab.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+.cat-count { background: rgba(255,255,255,.2); border-radius: 20px; padding: 1px 7px; font-size: 10px; }
+
+/* ===== CARDS GRID ===== */
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+.card-item {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 14px;
+  overflow: hidden; transition: all .25s; cursor: pointer; position: relative;
+}
+.card-item:hover { border-color: var(--blue); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(99,102,241,.2); }
+.card-img {
+  width: 100%; aspect-ratio: 1; background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px; position: relative; overflow: hidden;
+}
+.card-img img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.card-platform {
+  position: absolute; top: 8px; right: 8px;
+  border-radius: 6px; padding: 2px 8px; font-size: 10px; font-weight: 700;
+}
+.wb-badge { background: var(--wb); color: #fff; }
+.oz-badge { background: var(--oz); color: #fff; }
+.card-body { padding: 12px; }
+.card-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.3; }
+.card-desc { font-size: 11px; color: var(--text2); line-height: 1.5; }
+.card-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 8px; }
+.tag { background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; padding: 2px 7px; font-size: 10px; color: var(--text3); }
+
+/* CATEGORY SECTION HIDE */
+.cat-section { display: none; }
+.cat-section.active { display: block; }
+
+/* ===== SERVICES ===== */
+.services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.service-card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 24px;
+  transition: all .2s;
+}
+.service-card:hover { border-color: var(--blue); }
+.svc-ico { font-size: 32px; margin-bottom: 14px; }
+.svc-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.svc-desc { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 14px; }
+.svc-price { font-size: 20px; font-weight: 800; color: var(--blue2); }
+.svc-price span { font-size: 12px; color: var(--text3); font-weight: 400; }
+.svc-features { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.svc-feat { font-size: 12px; color: var(--text2); display: flex; align-items: center; gap: 7px; }
+.svc-feat::before { content: '✓'; color: var(--green); font-weight: 700; font-size: 13px; }
+
+/* ===== WHY ME ===== */
+.why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.why-card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px;
+}
+.why-ico { font-size: 28px; margin-bottom: 10px; }
+.why-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+.why-desc { font-size: 12px; color: var(--text2); line-height: 1.6; }
+
+/* ===== CONTACT ===== */
+.contact-card {
+  background: linear-gradient(135deg, rgba(99,102,241,.1), rgba(236,72,153,.08));
+  border: 1px solid rgba(99,102,241,.25); border-radius: 20px; padding: 48px 40px;
+  text-align: center; max-width: 600px; margin: 0 auto;
+}
+.contact-card h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+.contact-card p { color: var(--text2); font-size: 14px; line-height: 1.7; margin-bottom: 28px; }
+.contact-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.contact-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  border-radius: 12px; padding: 12px 22px; font-size: 14px; font-weight: 700;
+  text-decoration: none; transition: all .2s;
+}
+.tg-btn { background: rgba(34,158,217,.15); border: 1px solid rgba(34,158,217,.35); color: #22a7e5; }
+.tg-btn:hover { background: rgba(34,158,217,.25); transform: translateY(-2px); }
+.wa-btn { background: rgba(37,211,102,.12); border: 1px solid rgba(37,211,102,.3); color: #25d366; }
+.wa-btn:hover { background: rgba(37,211,102,.22); transform: translateY(-2px); }
+
+/* ===== FOOTER ===== */
+footer {
+  border-top: 1px solid var(--border); padding: 24px;
+  text-align: center; color: var(--text3); font-size: 12px;
+}
+
+/* MODAL */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,.8);
+  backdrop-filter: blur(8px); z-index: 200; align-items: center; justify-content: center; padding: 20px;
+}
+.modal-overlay.show { display: flex; }
+.modal {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 18px;
+  max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 28px;
+  position: relative;
+}
+.modal-close {
+  position: absolute; top: 16px; right: 16px; background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text2); width: 32px; height: 32px; border-radius: 8px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; font-size: 16px; transition: all .15s;
+}
+.modal-close:hover { color: var(--text); }
+.modal-img { width: 100%; aspect-ratio: 1; background: var(--bg3); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 80px; margin-bottom: 18px; overflow: hidden; }
+.modal-img img { width: 100%; height: 100%; object-fit: cover; }
+.modal-title { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+.modal-plat { display: inline-block; border-radius: 6px; padding: 3px 10px; font-size: 11px; font-weight: 700; margin-bottom: 12px; }
+.modal-desc { font-size: 14px; color: var(--text2); line-height: 1.7; }
+
+@media(max-width:600px){
+  .cards-grid { grid-template-columns: repeat(2, 1fr); }
+  section { padding: 60px 16px; }
+  .contact-card { padding: 32px 20px; }
+}
+
+/* LANG CONTENT */
+[data-uz], [data-ru] { }
+</style>
 </head>
 <body>
 
-    <header class="header">
-        <a href="#" class="logo">Portfolio.</a>
-        
-        <nav class="navbar">
-            <a href="#" style="--i:1;" class="active">Home</a>
-            <a href="About.html" style="--i:2;" >About</a>
-            <a href="portfolio.html" style="--i:4;" >Portfolio</a>
-            <a href="contact.html" style="--i:5;" >Contact</a>
-        </nav>
-    </header>
+<!-- NAV -->
+<nav class="lang-bar">
+  <div class="nav-logo">X<span>.</span>Design</div>
+  <div class="lang-btns">
+    <button class="lang-btn active" onclick="setLang('uz')" id="btnUz">🇺🇿 UZ</button>
+    <button class="lang-btn" onclick="setLang('ru')" id="btnRu">🇷🇺 RU</button>
+  </div>
+</nav>
 
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span data-uz>Mavjud — Buyurtma qabul qilinadi</span>
+      <span data-ru style="display:none">Доступен — Принимаю заказы</span>
+    </div>
 
-    <section class="home">
-        <div class="home-content">
-            <h3>Hello, It's Me</h3>
-            <h1>Rayimov Xurshid</h1>
-            <h3>and I'm a <span class="multiple-text"></span></h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-               Accusamus voluptates quasi voluptate! Libero, alias commodi.</p>
-               <div class="social-media">
-                    <a href="@ Xazinam_onam" style="--i:7;" ><i class='bx bxl-telegram'></i></a>
-                    <a href="https://www.youtube.com/@Ismlarga_Byurtma" style="--i:8;" ><i class='bx bxl-youtube'></i></a>
-                    <a href="https://www.instagram.com/invites/contact/?i=h2sdsdqgxe7r&utm_content=qbxjfyn" style="--i:9;" ><i class='bx bxl-instagram-alt'></i></a>
-                    <a href="#" style="--i:10;" ><i class='bx bxl-linkedin' ></i></a>
-               </div>
-               <a href="#" class="btn">Download CV</a>
+    <h1>
+      <span data-uz>Xurshidbek —<br><span class="grad">Kartochka Dizayneri</span></span>
+      <span data-ru style="display:none">Хуршидбек —<br><span class="grad">Дизайнер Карточек</span></span>
+    </h1>
+
+    <p class="hero-sub">
+      <span data-uz>Wildberries, Ozon va boshqa marketpleyslar uchun<br>professional mahsulot kartochkalari dizayni</span>
+      <span data-ru style="display:none">Профессиональный дизайн карточек товаров<br>для Wildberries, Ozon и других маркетплейсов</span>
+    </p>
+
+    <div class="platforms">
+      <div class="plat plat-wb">🛍️ Wildberries</div>
+      <div class="plat plat-oz">🔵 Ozon</div>
+      <div class="plat plat-yt">📦 Yandex Market</div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">200+</div>
+        <div class="stat-lbl" data-uz>Loyiha</div>
+        <div class="stat-lbl" data-ru style="display:none">Проектов</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">50+</div>
+        <div class="stat-lbl" data-uz>Mijoz</div>
+        <div class="stat-lbl" data-ru style="display:none">Клиентов</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5+</div>
+        <div class="stat-lbl" data-uz>Yil tajriba</div>
+        <div class="stat-lbl" data-ru style="display:none">Лет опыта</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-lbl" data-uz>Sifat kafolati</div>
+        <div class="stat-lbl" data-ru style="display:none">Гарантия качества</div>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <a href="#portfolio" class="btn-primary">
+        <span data-uz>🎨 Ishlarni ko'rish</span>
+        <span data-ru style="display:none">🎨 Посмотреть работы</span>
+      </a>
+      <a href="https://t.me/ZeroRisk0" class="btn-outline" target="_blank">
+        <span data-uz>✈️ Bog'lanish</span>
+        <span data-ru style="display:none">✈️ Связаться</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio" style="background: var(--bg2);">
+  <div class="container">
+    <div class="section-badge" data-uz>Portfolio</div>
+    <div class="section-badge" data-ru style="display:none">Портфолио</div>
+    <h2 class="section-title">
+      <span data-uz>Mening ishlarim</span>
+      <span data-ru style="display:none">Мои работы</span>
+    </h2>
+    <p class="section-sub">
+      <span data-uz>Har bir kategoriyada 10 ta professional kartochka namunasi</span>
+      <span data-ru style="display:none">По 10 профессиональных карточек в каждой категории</span>
+    </p>
+
+    <!-- CATEGORY TABS -->
+    <div class="cat-tabs">
+      <button class="cat-tab active" onclick="showCat('cars')">
+        🚗 <span data-uz>Transformer mashinalar</span><span data-ru style="display:none">Машины-трансформеры</span>
+        <span class="cat-count">10</span>
+      </button>
+      <button class="cat-tab" onclick="showCat('toys')">
+        🧸 <span data-uz>O'yinchoqlar</span><span data-ru style="display:none">Игрушки</span>
+        <span class="cat-count">10</span>
+      </button>
+      <button class="cat-tab" onclick="showCat('kitchen')">
+        🍳 <span data-uz>Oshxona jihozlari</span><span data-ru style="display:none">Кухонные товары</span>
+        <span class="cat-count">10</span>
+      </button>
+      <button class="cat-tab" onclick="showCat('sport')">
+        💪 <span data-uz>Sport mahsulotlari</span><span data-ru style="display:none">Спорттовары</span>
+        <span class="cat-count">10</span>
+      </button>
+      <button class="cat-tab" onclick="showCat('beauty')">
+        💄 <span data-uz>Go'zallik</span><span data-ru style="display:none">Красота</span>
+        <span class="cat-count">10</span>
+      </button>
+    </div>
+
+    <!-- TRANSFORMER CARS -->
+    <div class="cat-section active" id="cat-cars">
+      <div class="cards-grid" id="grid-cars"></div>
+    </div>
+
+    <!-- TOYS -->
+    <div class="cat-section" id="cat-toys">
+      <div class="cards-grid" id="grid-toys"></div>
+    </div>
+
+    <!-- KITCHEN -->
+    <div class="cat-section" id="cat-kitchen">
+      <div class="cards-grid" id="grid-kitchen"></div>
+    </div>
+
+    <!-- SPORT -->
+    <div class="cat-section" id="cat-sport">
+      <div class="cards-grid" id="grid-sport"></div>
+    </div>
+
+    <!-- BEAUTY -->
+    <div class="cat-section" id="cat-beauty">
+      <div class="cards-grid" id="grid-beauty"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-badge" data-uz>Xizmatlar</div>
+    <div class="section-badge" data-ru style="display:none">Услуги</div>
+    <h2 class="section-title">
+      <span data-uz>Narxlar va xizmatlar</span>
+      <span data-ru style="display:none">Цены и услуги</span>
+    </h2>
+    <p class="section-sub">
+      <span data-uz>Har qanday byudjetga mos tarif</span>
+      <span data-ru style="display:none">Тариф для любого бюджета</span>
+    </p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="svc-ico">⚡</div>
+        <div class="svc-title" data-uz>Standart</div>
+        <div class="svc-title" data-ru style="display:none">Стандарт</div>
+        <div class="svc-desc" data-uz>1 ta mahsulot kartochkasi dizayni</div>
+        <div class="svc-desc" data-ru style="display:none">Дизайн 1 карточки товара</div>
+        <div class="svc-price">от 500 ₽ <span data-uz>/ dona</span><span data-ru style="display:none">/ шт</span></div>
+        <div class="svc-features">
+          <div class="svc-feat" data-uz>5 ta rasm</div>
+          <div class="svc-feat" data-ru style="display:none">5 изображений</div>
+          <div class="svc-feat" data-uz>Infografika</div>
+          <div class="svc-feat" data-ru style="display:none">Инфографика</div>
+          <div class="svc-feat" data-uz>WB/Ozon standartlari</div>
+          <div class="svc-feat" data-ru style="display:none">Стандарты WB/Ozon</div>
+          <div class="svc-feat" data-uz>2 kun ichida</div>
+          <div class="svc-feat" data-ru style="display:none">За 2 дня</div>
         </div>
-
-        <div class="home-img">
-            <img src="./video and img/img_3.jpg" alt="">
+      </div>
+      <div class="service-card" style="border-color: var(--blue);">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+          <div class="svc-ico">🔥</div>
+          <span style="background:var(--blue);color:#fff;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;" data-uz>Mashhur</span>
+          <span style="background:var(--blue);color:#fff;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;" data-ru style="display:none">Хит</span>
         </div>
-    </section>
+        <div class="svc-title" data-uz>Premium pakет</div>
+        <div class="svc-title" data-ru style="display:none">Премиум пакет</div>
+        <div class="svc-desc" data-uz>5-10 ta mahsulot — katta chegirma</div>
+        <div class="svc-desc" data-ru style="display:none">5-10 товаров — большая скидка</div>
+        <div class="svc-price">от 3000 ₽ <span data-uz>/ paket</span><span data-ru style="display:none">/ пакет</span></div>
+        <div class="svc-features">
+          <div class="svc-feat" data-uz>7-10 ta rasm / kartochka</div>
+          <div class="svc-feat" data-ru style="display:none">7-10 изображений / карточка</div>
+          <div class="svc-feat" data-uz>A/B test variantlar</div>
+          <div class="svc-feat" data-ru style="display:none">A/B тест варианты</div>
+          <div class="svc-feat" data-uz>Raqobat tahlili</div>
+          <div class="svc-feat" data-ru style="display:none">Анализ конкурентов</div>
+          <div class="svc-feat" data-uz>Tuzatishlar cheksiz</div>
+          <div class="svc-feat" data-ru style="display:none">Правки без ограничений</div>
+          <div class="svc-feat" data-uz>1-3 kun ichida</div>
+          <div class="svc-feat" data-ru style="display:none">За 1-3 дня</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="svc-ico">👑</div>
+        <div class="svc-title" data-uz>Biznes paket</div>
+        <div class="svc-title" data-ru style="display:none">Бизнес пакет</div>
+        <div class="svc-desc" data-uz>20+ ta mahsulot — oylik hamkorlik</div>
+        <div class="svc-desc" data-ru style="display:none">20+ товаров — ежемесячное сотрудничество</div>
+        <div class="svc-price" data-uz>Narxni so'rang</div>
+        <div class="svc-price" data-ru style="display:none">Цена по запросу</div>
+        <div class="svc-features">
+          <div class="svc-feat" data-uz>To'liq brendlash</div>
+          <div class="svc-feat" data-ru style="display:none">Полный брендинг</div>
+          <div class="svc-feat" data-uz>Videografika</div>
+          <div class="svc-feat" data-ru style="display:none">Видеографика</div>
+          <div class="svc-feat" data-uz>Oylik qo'llab-quvvatlash</div>
+          <div class="svc-feat" data-ru style="display:none">Ежемесячная поддержка</div>
+          <div class="svc-feat" data-uz>Shaxsiy menejer</div>
+          <div class="svc-feat" data-ru style="display:none">Персональный менеджер</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- WHY ME -->
+<section style="background: var(--bg2);">
+  <div class="container">
+    <div class="section-badge" data-uz>Afzalliklar</div>
+    <div class="section-badge" data-ru style="display:none">Преимущества</div>
+    <h2 class="section-title">
+      <span data-uz>Nega aynan men?</span>
+      <span data-ru style="display:none">Почему именно я?</span>
+    </h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-ico">🎯</div>
+        <div class="why-title" data-uz>Konversiya uchun dizayn</div>
+        <div class="why-title" data-ru style="display:none">Дизайн для конверсии</div>
+        <div class="why-desc" data-uz>Faqat chiroyli emas, balki sotuv qiladigan kartochkalar yasayman</div>
+        <div class="why-desc" data-ru style="display:none">Создаю не просто красивые, а продающие карточки</div>
+      </div>
+      <div class="why-card">
+        <div class="why-ico">⚡</div>
+        <div class="why-title" data-uz>Tez yetkazish</div>
+        <div class="why-title" data-ru style="display:none">Быстрая доставка</div>
+        <div class="why-desc" data-uz>1-3 ish kuni ichida — kechikmasdan</div>
+        <div class="why-desc" data-ru style="display:none">В течение 1-3 рабочих дней — без задержек</div>
+      </div>
+      <div class="why-card">
+        <div class="why-ico">📐</div>
+        <div class="why-title" data-uz>Standartlarga mos</div>
+        <div class="why-title" data-ru style="display:none">Соответствие стандартам</div>
+        <div class="why-desc" data-uz>WB va Ozon talablarini to'liq bilaman</div>
+        <div class="why-desc" data-ru style="display:none">Полностью знаю требования WB и Ozon</div>
+      </div>
+      <div class="why-card">
+        <div class="why-ico">🔄</div>
+        <div class="why-title" data-uz>Cheksiz tuzatishlar</div>
+        <div class="why-title" data-ru style="display:none">Бесплатные правки</div>
+        <div class="why-desc" data-uz>Natija sizni qoniqtirmaguncha ishlashda davom etaman</div>
+        <div class="why-desc" data-ru style="display:none">Работаю до тех пор, пока результат вас не устроит</div>
+      </div>
+      <div class="why-card">
+        <div class="why-ico">📊</div>
+        <div class="why-title" data-uz>Raqobat tahlili</div>
+        <div class="why-title" data-ru style="display:none">Анализ конкурентов</div>
+        <div class="why-desc" data-uz>Raqobatchilardan ajralib turish uchun tadqiqot qilaman</div>
+        <div class="why-desc" data-ru style="display:none">Исследую конкурентов, чтобы выделиться</div>
+      </div>
+      <div class="why-card">
+        <div class="why-ico">💬</div>
+        <div class="why-title" data-uz>Doimiy aloqa</div>
+        <div class="why-title" data-ru style="display:none">Постоянная связь</div>
+        <div class="why-desc" data-uz>Telegram orqali tez javob beraman — 7/24</div>
+        <div class="why-desc" data-ru style="display:none">Быстро отвечаю в Telegram — 7/24</div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-card">
+      <h2>
+        <span data-uz>🚀 Buyurtma bering!</span>
+        <span data-ru style="display:none">🚀 Оставьте заявку!</span>
+      </h2>
+      <p>
+        <span data-uz>Mahsulotingiz uchun professional kartochka kerakmi?<br>Menga yozing — bepul maslahat beraman va narxni aytaman!</span>
+        <span data-ru style="display:none">Нужны профессиональные карточки для вашего товара?<br>Напишите мне — дам бесплатную консультацию и назову цену!</span>
+      </p>
+      <div class="contact-links">
+        <a href="https://t.me/ZeroRisk0" class="contact-btn tg-btn" target="_blank">
+          ✈️ Telegram: @ZeroRisk0
+        </a>
+        <a href="tel:+79337375844" class="contact-btn wa-btn">
+          📞 +7 933 737-58-44
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
- 
+<footer>
+  <p>© 2024 Xurshidbek · <span data-uz>Wildberries & Ozon Kartochka Dizayni</span><span data-ru style="display:none">Дизайн карточек Wildberries & Ozon</span></p>
+</footer>
 
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('modal').classList.remove('show')">✕</button>
+    <div class="modal-img" id="mImg"><span id="mEmoji"></span><img id="mImgEl" src="" style="display:none" alt=""></div>
+    <div class="modal-plat" id="mPlat"></div>
+    <div class="modal-title" id="mTitle"></div>
+    <div class="modal-desc" id="mDesc"></div>
+  </div>
+</div>
 
+<script>
+// ===== DATA =====
+const data = {
+  cars: [
+    {emoji:'🚗',title:{uz:'Transformer robot-mashina "Red Fury"',ru:'Машина-трансформер "Red Fury"'},desc:{uz:'Qizil sport mashina 4-12 yosh uchun. WB top-1 kategoriyada.',ru:'Красный спорткар для детей 4-12 лет. Топ-1 на WB в категории.'},plat:'WB',tags:['Dizayn','Infografika','Top seller']},
+    {emoji:'🤖',title:{uz:'Optimus Prime transformer 30 sm',ru:'Трансформер Оптимус Прайм 30 см'},desc:{uz:'Klassik transformer. 5 ta rasmli to\'liq kartochka paketi.',ru:'Классический трансформер. Полный пакет из 5 изображений.'},plat:'OZON',tags:['Premium','A/B test']},
+    {emoji:'🏎️',title:{uz:'Lamborghini transformer set 3 ta',ru:'Набор трансформеров Lamborghini 3 шт'},desc:{uz:'3 ta mashinadan iborat to\'plam. Narx-sifat nisbati optimal.',ru:'Набор из 3 машин. Оптимальное соотношение цена-качество.'},plat:'WB',tags:['Set','Chegirma']},
+    {emoji:'🚙',title:{uz:'Jeep transformer 1:18 masshtab',ru:'Джип-трансформер масштаб 1:18'},desc:{uz:'Katta o\'lchamli kolleksion model. Detallar to\'liq ko\'rsatilgan.',ru:'Крупномасштабная коллекционная модель. Все детали показаны.'},plat:'OZON',tags:['Kolleksiya','1:18']},
+    {emoji:'🚓',title:{uz:'Politsiya transformer "Police Bot"',ru:'Полицейский трансформер "Police Bot"'},desc:{uz:'Yorug\'liklar va tovush bilan. Infografika + fon fotosessiya.',ru:'Со световыми и звуковыми эффектами. Инфографика + фотосессия.'},plat:'WB',tags:['Ovoz','Yorug\'lik']},
+    {emoji:'✈️',title:{uz:'Samolyot-robot transformer XL',ru:'Самолёт-робот трансформер XL'},desc:{uz:'Qanot ochilishi mexanizmi. Har bir bosqich rasmda ko\'rsatilgan.',ru:'Механизм раскрытия крыльев. Каждый этап показан на фото.'},plat:'OZON',tags:['XL','Mexanizm']},
+    {emoji:'🚀',title:{uz:'Kosmik raketa-robot transformer',ru:'Космическая ракета-робот трансформер'},desc:{uz:'Noyob dizayn. Raqobatchilardan farqli stillashtirilgan suratlar.',ru:'Уникальный дизайн. Стилизованные фото, отличные от конкурентов.'},plat:'WB',tags:['Noyob','Stil']},
+    {emoji:'🚂',title:{uz:'Lokomotiv-robot 2-in-1 transformer',ru:'Локомотив-робот 2-в-1 трансформер'},desc:{uz:'Poyezd va robot — ikki o\'yinchoq bitta narxda. Split infografika.',ru:'Поезд и робот — две игрушки по цене одной. Сплит-инфографика.'},plat:'OZON',tags:['2-in-1','Split']},
+    {emoji:'🏗️',title:{uz:'Qurilish texnika-robot transformer',ru:'Строительная техника-робот трансформер'},desc:{uz:'Sariq buldozer to\'plami. Real fon + aq fon ikki variant.',ru:'Набор жёлтых бульдозеров. Реальный фон + белый фон два варианта.'},plat:'WB',tags:['Real fon','A/B']},
+    {emoji:'🐉',title:{uz:'Dinozavr-robot transformer "Dinobot"',ru:'Динозавр-робот трансформер "Dinobot"'},desc:{uz:'Tyrannosaurus dizayni. Bolalar uchun jozibali rang sxemasi.',ru:'Дизайн тираннозавра. Привлекательная цветовая схема для детей.'},plat:'OZON',tags:['Dino','Rang']},
+  ],
+  toys: [
+    {emoji:'🧸',title:{uz:'Premium teris ayiq "Misha" 50 sm',ru:'Плюшевый медведь "Миша" 50 см'},desc:{uz:'Yumshoq tola to\'ldirma. Gippoallergen. Tozalash instruksiyasi.',ru:'Мягкий наполнитель. Гипоаллергенный. Инструкция по уходу.'},plat:'WB',tags:['Premium','Gippoallergen']},
+    {emoji:'🎮',title:{uz:'LEGO City konstruktor 450 detal',ru:'Конструктор LEGO City 450 деталей'},desc:{uz:'Barcha detallar hisoblangan. WB talablariga mos to\'liq infografika.',ru:'Все детали посчитаны. Полная инфографика по требованиям WB.'},plat:'WB',tags:['LEGO','450 detal']},
+    {emoji:'🎪',title:{uz:'Bolalar uchun qo\'g\'irchoq uycha',ru:'Кукольный домик для девочек'},desc:{uz:'3 qavatli uy. Mebel to\'plami kiradi. Stil — skandinav.',ru:'3-этажный дом. Включен набор мебели. Стиль — скандинавский.'},plat:'OZON',tags:['3 qavat','Mebel']},
+    {emoji:'🌈',title:{uz:'Sensorli taxta Montessori 12-in-1',ru:'Сенсорная доска Монтессори 12-в-1'},desc:{uz:'12 ta faoliyat bitta taxtada. Har bir funksiya infografikada.',ru:'12 активностей на одной доске. Каждая функция в инфографике.'},plat:'WB',tags:['Montessori','12-in-1']},
+    {emoji:'🎯',title:{uz:'Bolalar uchun kamonchi to\'plami',ru:'Набор лучника для детей'},desc:{uz:'Xavfsiz o\'qlar. Sport o\'yin. Yosh chegarasi ko\'rsatilgan.',ru:'Безопасные стрелы. Спортивная игра. Возрастное ограничение указано.'},plat:'OZON',tags:['Sport','Xavfsiz']},
+    {emoji:'🎨',title:{uz:'Finger paint bo\'yoqlar 12 rang',ru:'Пальчиковые краски 12 цветов'},desc:{uz:'Yuvib ketadigan. 1+ yosh. Rasm yaratish jarayoni ko\'rsatilgan.',ru:'Смываемые. От 1 года. Показан процесс создания рисунка.'},plat:'WB',tags:['1+ yosh','Washable']},
+    {emoji:'🤖',title:{uz:'Interaktiv robot Cody o\'rgatuvchi',ru:'Интерактивный робот Cody обучающий'},desc:{uz:'100+ savolga javob beradi. Ingliz + Rus tilida. Batareya kiradi.',ru:'Отвечает на 100+ вопросов. Английский + Русский. Батарейки включены.'},plat:'OZON',tags:['Interaktiv','2 til']},
+    {emoji:'🚂',title:{uz:'Yog\'och poyezd yo\'li to\'plami 130 detal',ru:'Деревянная железная дорога 130 деталей'},desc:{uz:'Ekologik yog\'och. To\'liq yig\'ish sxemasi infografikada.',ru:'Экологичное дерево. Полная схема сборки в инфографике.'},plat:'WB',tags:['Yog\'och','Eko']},
+    {emoji:'🎻',title:{uz:'Bolalar gitara 6 torli mini',ru:'Детская гитара 6-струнная мини'},desc:{uz:'Haqiqiy metaldan torlar. Sozlash kaliti bilan. Nota kitobi.',ru:'Настоящие металлические струны. С ключом для настройки. Нотная книга.'},plat:'OZON',tags:['Musiqa','Nota kitob']},
+    {emoji:'🏰',title:{uz:'Qal\'a konstruktor qiz bolalar uchun',ru:'Конструктор замок для девочек'},desc:{uz:'Barcha qismlar rangli. To\'g\'ridan-to\'g\'ri yig\'ish video QR kodi.',ru:'Все части цветные. QR-код видео сборки в реальном времени.'},plat:'WB',tags:['QR kod','Qiz uchun']},
+  ],
+  kitchen: [
+    {emoji:'🍳',title:{uz:'Granitli qo\'shimcha qoplama 28 sm',ru:'Сковорода с гранитным покрытием 28 см'},desc:{uz:'4 qatlamli qoplama. Teflon yo\'q. Isitish ko\'rsatgichi.',ru:'4-слойное покрытие. Без тефлона. Индикатор нагрева.'},plat:'WB',tags:['Granit','Sog\'lom']},
+    {emoji:'🔪',title:{uz:'Professional oshpaz pichog\'i Damask',ru:'Профессиональный нож шеф-повара Дамаск'},desc:{uz:'67 qatlam po\'lat. Qo\'l bilan yasalgan. Sertifikat bilan.',ru:'67 слоёв стали. Ручная работа. С сертификатом.'},plat:'OZON',tags:['Damask','Professional']},
+    {emoji:'☕',title:{uz:'Frantsuz pressa 1 litr shisha',ru:'Французский пресс 1 литр стекло'},desc:{uz:'Borosilicate shisha. Qovurg\'a bardoshli. Batafsil infografika.',ru:'Боросиликатное стекло. Ударопрочное. Подробная инфографика.'},plat:'WB',tags:['1L','Shisha']},
+    {emoji:'🥘',title:{uz:'Chug\'un qozon 5 litr qizil',ru:'Чугунный казан 5 литров красный'},desc:{uz:'Emal qoplama. Duch uchun ideal. Og\'irligi va o\'lchami ko\'rsatilgan.',ru:'Эмалевое покрытие. Идеально для плова. Вес и размеры указаны.'},plat:'OZON',tags:['Chug\'un','Duch']},
+    {emoji:'🧊',title:{uz:'Vakuum termos 1.5 litr 24 soat',ru:'Вакуумный термос 1.5 литра 24 часа'},desc:{uz:'24 soat issiq, 36 soat sovuq. Sizib chiqmaydi. Test ko\'rsatilgan.',ru:'24 часа горячее, 36 холодное. Не протекает. Показан тест.'},plat:'WB',tags:['24h','Vakuum']},
+    {emoji:'🌿',title:{uz:'O\'t-o\'simlik kesuvchi to\'plam 5 ta',ru:'Набор измельчителей трав 5 штук'},desc:{uz:'Har biri uchun rang kodi. Dishwasher safe. Devor tutqichi.',ru:'Цветовой код для каждого. Можно в посудомойку. Настенный держатель.'},plat:'OZON',tags:['5 ta','Rang kodi']},
+    {emoji:'🥄',title:{uz:'Silikonli oshxona asboblari 8 ta',ru:'Силиконовые кухонные инструменты 8 шт'},desc:{uz:'Issiqqa bardoshli 230°C. Oziq-ovqat silikondan. To\'liq to\'plam.',ru:'Жаропрочные до 230°C. Пищевой силикон. Полный комплект.'},plat:'WB',tags:['Silikonli','8 ta']},
+    {emoji:'🍕',title:{uz:'Pizza toshlari granit 38 sm',ru:'Камень для пиццы гранит 38 см'},desc:{uz:'Original granit tosh. Issiqni teng taqsimlovchi. Retsept kitob.',ru:'Натуральный гранит. Равномерное распределение тепла. Книга рецептов.'},plat:'OZON',tags:['Granit','Pizza']},
+    {emoji:'🎂',title:{uz:'Kulinariya shakllar to\'plami 20 ta',ru:'Набор форм для выпечки 20 штук'},desc:{uz:'Anti-yopishuvchi qoplama. Har xil shakllar. Sovg\'a qutisida.',ru:'Антипригарное покрытие. Разные формы. В подарочной упаковке.'},plat:'WB',tags:['20 ta','Sovg\'a']},
+    {emoji:'🫙',title:{uz:'Shisha bankalar to\'plami 12 ta 0.5L',ru:'Набор стеклянных банок 12 шт 0.5л'},desc:{uz:'Germetik qopqoqlar. Dishwasher safe. Label stikerlari bilan.',ru:'Герметичные крышки. Можно в посудомойку. Со стикерами для меток.'},plat:'OZON',tags:['12 ta','Germetik']},
+  ],
+  sport: [
+    {emoji:'💪',title:{uz:'Rezina ekspander to\'plami 5 ta',ru:'Набор резиновых эспандеров 5 штук'},desc:{uz:'5 xil qarshilik darajasi. Rang kodi bilan. Uy trenajyori.',ru:'5 уровней сопротивления. Цветовой код. Тренажёр для дома.'},plat:'WB',tags:['5 ta','Uy trening']},
+    {emoji:'🧘',title:{uz:'Yoga matcha 10mm ekologik TPE',ru:'Коврик для йоги 10мм экологичный TPE'},desc:{uz:'Slip-qilmaydigan. O\'lchamlash chiziqlari bor. Tashish qayishi.',ru:'Нескользящий. Есть разметка. Ремень для переноски.'},plat:'OZON',tags:['TPE','Eko']},
+    {emoji:'🏋️',title:{uz:'Guirya 16 kg vinyl qoplama',ru:'Гиря 16 кг виниловое покрытие'},desc:{uz:'Vinildan himoyalangan. Polni chizmaydi. Og\'irlik belgilanган.',ru:'Защита виниловым покрытием. Не царапает пол. Маркировка веса.'},plat:'WB',tags:['16kg','Vinyl']},
+    {emoji:'⏱️',title:{uz:'Sport sekundomer professional IP67',ru:'Спортивный секундомер профессиональный IP67'},desc:{uz:'Suv o\'tmaydigan IP67. 100 ta natija xotirasi. Plyaj uchun.',ru:'Водонепроницаемый IP67. Память 100 результатов. Для пляжа.'},plat:'OZON',tags:['IP67','100 xotira']},
+    {emoji:'🥊',title:{uz:'Boks qo\'lqoplari 12 oz teri',ru:'Боксёрские перчатки 12 oz кожа'},desc:{uz:'Haqiqiy teri. Qo\'l bilagi himoyasi. Har ikki qo\'l bilan.',ru:'Натуральная кожа. Защита запястья. Для обеих рук.'},plat:'WB',tags:['12oz','Teri']},
+    {emoji:'🏊',title:{uz:'Suzuvchilar ko\'zoynagi professional',ru:'Профессиональные очки для плавания'},desc:{uz:'Anti-tuman linzalar. UV himoya. Burun ko\'prigi almashtiriladigan.',ru:'Линзы антизапотевание. UV защита. Сменные переносицы.'},plat:'OZON',tags:['UV','Anti-tuman']},
+    {emoji:'🚴',title:{uz:'Velosiped dubulg\'asi MTB L o\'lcham',ru:'Велосипедный шлем MTB размер L'},desc:{uz:'Havo sirkulyatsiyasi 16 teshik. Yengil 280g. Sertifikat.',ru:'Вентиляция 16 отверстий. Лёгкий 280г. Сертификат безопасности.'},plat:'WB',tags:['MTB','280g']},
+    {emoji:'⚽',title:{uz:'Futbol to\'pi №5 FIFA sifati',ru:'Футбольный мяч №5 FIFA качество'},desc:{uz:'Termopriyonirgich qatlam. Suv o\'tmaydigan. Nasos bilan.',ru:'Термосварной слой. Водонепроницаемый. С насосом.'},plat:'OZON',tags:['FIFA','Nasos bilan']},
+    {emoji:'🏃',title:{uz:'Yugurish poyabzali lightweight 41',ru:'Кроссовки для бега lightweight 41'},desc:{uz:'250g engil. Eva pishiq taglik. Nafas oladigan mesh.',ru:'250г лёгкие. Подошва EVA. Дышащая сетка.'},plat:'WB',tags:['250g','Mesh']},
+    {emoji:'🎽',title:{uz:'Kompressiya futbolka sport dry-fit',ru:'Компрессионная футболка спорт dry-fit'},desc:{uz:'Tez quriydigan mato. UPF 50+. Choklar tekis — terini tirnамайди.',ru:'Быстросохнущая ткань. UPF 50+. Плоские швы — не натирают.'},plat:'WB',tags:['Dry-fit','UPF50']},
+  ],
+  beauty: [
+    {emoji:'💆',title:{uz:'Gua sha tosh yuz massajori',ru:'Камень гуа-ша для массажа лица'},desc:{uz:'Haqiqiy kvars tosh. Foydalanish qo\'llanmasi. Sovg\'a quti.',ru:'Натуральный кварц. Инструкция по применению. Подарочная коробка.'},plat:'WB',tags:['Kvars','Sovg\'a']},
+    {emoji:'💋',title:{uz:'O\'smoq to\'plami 12 rang mat',ru:'Набор помад 12 цветов матовые'},desc:{uz:'12 ta rang bir qutida. Mat effekt 8 soat. Quruqlashtirmaydi.',ru:'12 цветов в одном наборе. Матовый эффект 8 часов. Не сушит.'},plat:'OZON',tags:['12 rang','8 soat']},
+    {emoji:'✨',title:{uz:'Vitamin C yuz serumi 30ml',ru:'Сыворотка для лица Vitamin C 30мл'},desc:{uz:'20% vitamin C. Dog\'larni yo\'qotadi. Dermatolog sinovdan o\'tgan.',ru:'20% витамин C. Убирает пятна. Протестировано дерматологом.'},plat:'WB',tags:['20% VitC','Dermatolog']},
+    {emoji:'🧴',title:{uz:'Hyaluronik kislota niqobi 10 ta',ru:'Маска с гиалуроновой кислотой 10 шт'},desc:{uz:'Bir martalik niqoblar. Tez singadi. Koreys formulasi.',ru:'Одноразовые маски. Быстро впитывается. Корейская формула.'},plat:'OZON',tags:['10ta','Koreys']},
+    {emoji:'💅',title:{uz:'Gel lak to\'plami 36 ta rang',ru:'Набор гель-лаков 36 цветов'},desc:{uz:'UV/LED uchun. Chip qilmaydi. Professional sifat uy uchun.',ru:'Для UV/LED. Не скалывается. Профессиональное качество для дома.'},plat:'WB',tags:['36 rang','UV/LED']},
+    {emoji:'🌸',title:{uz:'Atir suvi Floral 50ml EDP',ru:'Парфюмерная вода Floral 50мл EDP'},desc:{uz:'Gul iforli. 8+ soat chidaydi. Rasm va ifor tavsifi infografikada.',ru:'Цветочный аромат. Держится 8+ часов. Описание аромата в инфографике.'},plat:'OZON',tags:['EDP','8+ soat']},
+    {emoji:'🪥',title:{uz:'Elektr tish cho\'tkasi ultrasonic',ru:'Электрическая зубная щётка ультразвуковая'},desc:{uz:'40000 harakatlar/daqiqa. 4 ta rejim. 30 kun batareya.',ru:'40000 движений/мин. 4 режима. Аккумулятор 30 дней.'},plat:'WB',tags:['Ultrasonic','30 kun']},
+    {emoji:'🫧',title:{uz:'Ko\'piklovchi yuz tozalagich probiotik',ru:'Пенка для умывания пробиотик'},desc:{uz:'Probiotik tarkib. pH balansi. Barcha teri turlari uchun.',ru:'Пробиотический состав. Баланс pH. Для всех типов кожи.'},plat:'OZON',tags:['Probiotik','pH']},
+    {emoji:'🧖',title:{uz:'Anti-sellyulit massaj qo\'lqopchasi',ru:'Антицеллюлитная массажная рукавица'},desc:{uz:'Quruq va ho\'l massaj. Qon aylanishini yaxshilaydi. Hammomga mos.',ru:'Сухой и влажный массаж. Улучшает кровообращение. Для ванной.'},plat:'WB',tags:['Quruq/Ho\'l','Hammom']},
+    {emoji:'🌙',title:{uz:'Kecha kremi retinol 50ml anti-age',ru:'Ночной крем ретинол 50мл антивозрастной'},desc:{uz:'0.3% retinol. Ajinlarni kamaytiradi. Klinik sinovdan o\'tgan.',ru:'0.3% ретинол. Уменьшает морщины. Клинически проверен.'},plat:'WB',tags:['Retinol','Anti-age']},
+  ]
+};
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+let currentLang = 'uz';
 
-    <script src="script.js"></script>
+// Render all grids
+function renderAll(){
+  Object.keys(data).forEach(cat => {
+    const grid = document.getElementById('grid-'+cat);
+    grid.innerHTML = data[cat].map((item,i) => `
+      <div class="card-item" onclick="openModal('${cat}',${i})">
+        <div class="card-img">
+          <span>${item.emoji}</span>
+          <div class="card-platform ${item.plat==='WB'?'wb-badge':'oz-badge'}">${item.plat}</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">${item.title[currentLang]}</div>
+          <div class="card-desc">${item.desc[currentLang].slice(0,50)}...</div>
+          <div class="card-tags">${item.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        </div>
+      </div>
+    `).join('');
+  });
+}
+
+function showCat(cat){
+  document.querySelectorAll('.cat-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('cat-'+cat).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+function openModal(cat, i){
+  const item = data[cat][i];
+  document.getElementById('mEmoji').textContent = item.emoji;
+  document.getElementById('mTitle').textContent = item.title[currentLang];
+  document.getElementById('mDesc').textContent = item.desc[currentLang];
+  const plat = document.getElementById('mPlat');
+  plat.textContent = item.plat === 'WB' ? '🛍️ Wildberries' : '🔵 Ozon';
+  plat.className = 'modal-plat ' + (item.plat==='WB'?'wb-badge':'oz-badge');
+  document.getElementById('modal').classList.add('show');
+}
+
+function closeModal(e){
+  if(e.target===document.getElementById('modal')) document.getElementById('modal').classList.remove('show');
+}
+
+function setLang(lang){
+  currentLang = lang;
+  document.getElementById('btnUz').classList.toggle('active', lang==='uz');
+  document.getElementById('btnRu').classList.toggle('active', lang==='ru');
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('[data-uz]').forEach(el => el.style.display = lang==='uz' ? '' : 'none');
+  document.querySelectorAll('[data-ru]').forEach(el => el.style.display = lang==='ru' ? '' : 'none');
+
+  renderAll();
+}
+
+// Init
+renderAll();
+setLang('uz');
+</script>
 </body>
 </html>
